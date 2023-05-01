@@ -43,16 +43,13 @@ function filterData(data){
 }
 
 function filterForecast(data){
-    const forecastDay2 = {
-        forecastDay: data.forecast.forecastday[1].date,
-        averageTemp: data.forecast.forecastday[1].day.avgtemp_c
-        }
-    const forecastDay3 = {
-        forecastDay: data.forecast.forecastday[2].date,
-        averageTemp: data.forecast.forecastday[2].day.avgtemp_c
+    for (let i = 0; i < 3; i++) {
+        const forecastDay = {
+            forecastDay: data.forecast.forecastday[i].date,
+            averageTemp: data.forecast.forecastday[i].day.avgtemp_c
+            }
+        renderForecast(forecastDay);
     }
-    renderForecast(forecastDay2);
-    renderForecast(forecastDay3);
 }
 
 function render(info){
