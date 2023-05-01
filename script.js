@@ -80,14 +80,17 @@ function renderColor(celsius){
 
 function renderForecast(info){
     const forecastDiv = document.querySelector(".forecast");
-    const day = document.createElement("p");
+    const day = document.createElement("div");
     day.id = "day";
-    day.textContent = info.forecastDay;
+    const date = document.createElement("p");
+    date.id = "date";
+    date.textContent = `Date: ${info.forecastDay}`;
     const averageTemp = document.createElement("p");
     averageTemp.id = "averageTemp";
-    averageTemp.textContent = info.averageTemp;
+    averageTemp.textContent = `Avg \u2103: ${info.averageTemp}`;
     forecastDiv.appendChild(day);
-    forecastDiv.appendChild(averageTemp);
+    day.appendChild(date);
+    day.appendChild(averageTemp); 
 }
 getData("novosibirsk");
 getForecast("novosibirsk");
