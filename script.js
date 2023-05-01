@@ -10,10 +10,17 @@ async function getData(city){
     } 
 }
 
+async function getForecast(city){
+    const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=2f36dadd85054b5591e102613233004&q=${city}&days=3`);
+    const data = await response.json();
+    filterForecast(data);
+}
+
 function inputLocation(){
     const searchInput = document.querySelector("input");
     const city = searchInput.value;
     getData(city);
+    getForecast(city);
 }
 
 const button = document.querySelector("button");
@@ -33,6 +40,19 @@ function filterData(data){
     }
     render(weatherInfo);
     renderColor(weatherInfo.celsius);
+}
+
+function filterForecast(data){
+    const forecastDay2 = {
+        forecastDay: data.forecast.forecastday[1].date,
+        averageTemp: data.forecast.forecastday[1].day.avgtemp_c
+        }
+    const forecastDay3 = {
+        forecastDay: data.forecast.forecastday[2].date,
+        averageTemp: data.forecast.forecastday[2].day.avgtemp_c
+    }
+    renderForecast(forecastDay2);
+    renderForecast(forecastDay3);
 }
 
 function render(info){
@@ -61,4 +81,16 @@ function renderColor(celsius){
     }
 }
 
+function renderForecast(info){
+    const forecastDiv = document.querySelector(".forecast");
+    const day = document.createElement("p");
+    day.id = "day";
+    day.textContent = info.forecastDay;
+    const averageTemp = document.createElement("p");
+    averageTemp.id = "averageTemp";
+    averageTemp.textContent = info.averageTemp;
+    forecastDiv.appendChild(day);
+    forecastDiv.appendChild(averageTemp);
+}
 getData("novosibirsk");
+getForecast("novosibirsk");
