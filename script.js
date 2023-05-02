@@ -1,10 +1,13 @@
 async function getWeather(city){
     const errorInfo = document.querySelector("#errorInfo");
+    const loader = document.querySelector(".lds-dual-ring");
     try {
+        loader.style.display = "block";
         const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=2f36dadd85054b5591e102613233004&q=${city}`);
         const data = await response.json();
         filterCurrentWeather(data);
         errorInfo.textContent = "";
+        loader.style.display = "none";
     } catch(error){
         console.log(error);
         errorInfo.textContent = "Make sure you entered a city name";
