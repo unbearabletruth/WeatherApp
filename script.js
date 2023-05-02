@@ -48,7 +48,7 @@ function filterForecast(data){
             forecastDay: data.forecast.forecastday[i].date,
             averageTemp: data.forecast.forecastday[i].day.avgtemp_c
             }
-        renderForecast(forecastDay);
+        renderForecast(forecastDay, i);
     }
 }
 
@@ -56,7 +56,7 @@ function render(info){
     const cityName = document.querySelector("#city");
     cityName.textContent = info.location;
     const temp = document.querySelector("#temperature");
-    temp.textContent = `Temp: ${info.celsius}\u2103 / ${info.fahrenheit}\u2109`;
+    temp.textContent = `${info.celsius}\u2103/ ${info.fahrenheit}\u2109`;
     const condition = document.querySelector("#conditionText");
     condition.textContent = info.condition;
     const conditionIcon = document.querySelector("#conditionImg");
@@ -66,31 +66,32 @@ function render(info){
 }
 
 function renderColor(celsius){
-    const weatherCard = document.querySelector(".weatherInfo");
+    const body = document.querySelector("body");
     if (celsius > 15){
-        weatherCard.style.backgroundColor = "#fed7aa";
+        body.style.backgroundColor = "#fff7ed";
     } else if (celsius <= 15 && celsius > 5){
-        weatherCard.style.backgroundColor = "#fff7ed";
+        body.style.backgroundColor = "#fefce8";
     } else if (celsius <= 5 && celsius > -10){
-        weatherCard.style.backgroundColor = "white";
+        body.style.backgroundColor = "#f0fdf4";
     } else {
-        weatherCard.style.backgroundColor = "#bae6fd";
+        body.style.backgroundColor = "#ecfeff";
     }
 }
 
-function renderForecast(info){
-    const forecastDiv = document.querySelector(".forecast");
-    const day = document.createElement("div");
-    day.id = "day";
-    const date = document.createElement("p");
-    date.id = "date";
-    date.textContent = `Date: ${info.forecastDay}`;
-    const averageTemp = document.createElement("p");
-    averageTemp.id = "averageTemp";
+function renderForecast(info, index){
+    ++index;
+    const date = document.querySelector(`#date${index}`);
+    date.textContent = dateToWeekDay(info.forecastDay);
+    const averageTemp = document.querySelector(`#averageTemp${index}`);
     averageTemp.textContent = `Avg \u2103: ${info.averageTemp}`;
-    forecastDiv.appendChild(day);
-    day.appendChild(date);
-    day.appendChild(averageTemp); 
 }
+
+function dateToWeekDay(date){
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const toDate = new Date(date);
+    const toweekDay = weekday[toDate.getDay()];
+    return toweekDay;
+}
+
 getData("novosibirsk");
 getForecast("novosibirsk");

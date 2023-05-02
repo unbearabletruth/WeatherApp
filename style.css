@@ -7,32 +7,66 @@
 body {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 15px;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 50px;
+    gap: 20px;
+}
+
+input {
+    appearance: none;
+    padding: 0px 5px;
+    width: 80%;
+    height: 50px;
+    border: 2px solid #60a5fa;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    width: 100%;
+}
+
+input:focus {
+    outline: none;
+    border-color: #3b82f6;
 }
 
 .weatherInfo {
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: space-between;
     width: 250px;
     height: 250px;
     border-radius: 10px;
-    padding: 10px;
+    padding: 25px;
     color: #525252;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    width: 100%;
+    background-color: #fefce8;
+}
+
+#temperature {
+    font-size: 50px;
 }
 
 .condition {
     display: flex;
+    position: absolute;
+    right: 25px;
     flex-direction: column;
-    align-items: end;
+    align-items: center;
     margin-left: auto;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 #conditionImg {
-    width: 40px;
+    width: 50px;
     height: auto;
 }
 
@@ -44,9 +78,11 @@ p#city {
 .forecast {
     display: flex;
     gap: 10px;
+    width: 100%;
+    justify-content: space-around;
 }
 
-#day {
+.day {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -56,4 +92,5 @@ p#city {
     padding: 10px;
     color: #525252;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    background-color: #fefce8;
 }
