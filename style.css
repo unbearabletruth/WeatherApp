@@ -10,6 +10,7 @@ body {
     justify-content: space-between;
     gap: 10px;
     padding: 15px;
+    height: 100vh;
 }
 
 form {
@@ -25,7 +26,7 @@ input {
     padding: 0px 5px;
     width: 80%;
     height: 50px;
-    border: 2px solid #60a5fa;
+    border: 2px solid #fef08a;
     border-radius: 10px;
     font-size: 1.5rem;
     width: 100%;
@@ -33,7 +34,7 @@ input {
 
 input:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: #fde047;
 }
 
 .weatherInfo {
@@ -70,6 +71,11 @@ input:focus {
     height: auto;
 }
 
+.condIcon {
+    width: 30px;
+    height: auto;
+}
+
 p#city {
     font-size: 18px;
     font-weight: bold;
@@ -93,4 +99,19 @@ p#city {
     color: #525252;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     background-color: #fefce8;
+}
+
+button {
+    width: 100%;
+    height: 50px;
+    border: 3px solid #fef08a;
+    border-radius: 10px;
+    background-color: #fefce8;
+    color: #525252;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #fef08a;
 }

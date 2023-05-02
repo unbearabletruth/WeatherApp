@@ -46,7 +46,9 @@ function filterForecast(data){
     for (let i = 0; i < 3; i++) {
         const forecastDay = {
             forecastDay: data.forecast.forecastday[i].date,
-            averageTemp: data.forecast.forecastday[i].day.avgtemp_c
+            dayTemp: data.forecast.forecastday[i].day.maxtemp_c,
+            nightTemp: data.forecast.forecastday[i].day.mintemp_c,
+            conditionIcon: data.forecast.forecastday[i].day.condition.icon
             }
         renderForecast(forecastDay, i);
     }
@@ -82,8 +84,12 @@ function renderForecast(info, index){
     ++index;
     const date = document.querySelector(`#date${index}`);
     date.textContent = dateToWeekDay(info.forecastDay);
-    const averageTemp = document.querySelector(`#averageTemp${index}`);
-    averageTemp.textContent = `Avg \u2103: ${info.averageTemp}`;
+    const dayTemp = document.querySelector(`#dayTemp${index}`);
+    dayTemp.textContent = `Day \u2103: ${info.dayTemp}`;
+    const nightTemp = document.querySelector(`#nightTemp${index}`);
+    nightTemp.textContent = `Night \u2103: ${info.nightTemp}`;
+    const conditionIcon = document.querySelector(`#conditionImg${index}`);
+    conditionIcon.src = info.conditionIcon;
 }
 
 function dateToWeekDay(date){
