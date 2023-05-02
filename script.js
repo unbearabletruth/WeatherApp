@@ -1,8 +1,8 @@
-async function getData(city){
+async function getWeather(city){
     try {
         const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=2f36dadd85054b5591e102613233004&q=${city}`);
         const data = await response.json();
-        filterData(data);
+        filterCurrentWeather(data);
     } catch(error){
         console.log(error);
         const errorInfo = document.querySelector("#errorInfo");
@@ -16,10 +16,16 @@ async function getForecast(city){
     filterForecast(data);
 }
 
+async function getLocation(){
+    const response = await fetch("https://api.weatherapi.com/v1/ip.json?key=2f36dadd85054b5591e102613233004&q=auto:ip");
+    const data = await response.json();
+    filterLocation(data);
+}
+
 function inputLocation(){
     const searchInput = document.querySelector("input");
     const city = searchInput.value;
-    getData(city);
+    getWeather(city);
     getForecast(city);
 }
 
@@ -29,7 +35,7 @@ button.addEventListener("click", (e) => {
     e.preventDefault();
 })
 
-function filterData(data){
+function filterCurrentWeather(data){
     const weatherInfo = {
         location: data.location.name,
         celsius: data.current.temp_c,
@@ -52,6 +58,13 @@ function filterForecast(data){
             }
         renderForecast(forecastDay, i);
     }
+}
+
+function filterLocation(data){
+    const city = data.city;
+    console.log(city)
+    getWeather(city);
+    getForecast(city);
 }
 
 function render(info){
@@ -99,5 +112,4 @@ function dateToWeekDay(date){
     return toweekDay;
 }
 
-getData("novosibirsk");
-getForecast("novosibirsk");
+getLocation();
