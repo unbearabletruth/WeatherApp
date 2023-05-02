@@ -1,25 +1,34 @@
 async function getWeather(city){
+    const errorInfo = document.querySelector("#errorInfo");
     try {
         const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=2f36dadd85054b5591e102613233004&q=${city}`);
         const data = await response.json();
         filterCurrentWeather(data);
+        errorInfo.textContent = "";
     } catch(error){
         console.log(error);
-        const errorInfo = document.querySelector("#errorInfo");
         errorInfo.textContent = "Make sure you entered a city name";
     } 
 }
 
 async function getForecast(city){
-    const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=2f36dadd85054b5591e102613233004&q=${city}&days=3`);
-    const data = await response.json();
-    filterForecast(data);
+    try {
+        const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=2f36dadd85054b5591e102613233004&q=${city}&days=3`);
+        const data = await response.json();
+        filterForecast(data);
+    } catch(error){
+        console.log(error);
+    }   
 }
 
 async function getLocation(){
-    const response = await fetch("https://api.weatherapi.com/v1/ip.json?key=2f36dadd85054b5591e102613233004&q=auto:ip");
-    const data = await response.json();
-    filterLocation(data);
+    try {
+        const response = await fetch("https://api.weatherapi.com/v1/ip.json?key=2f36dadd85054b5591e102613233004&q=auto:ip");
+        const data = await response.json();
+        autoLocation(data);
+    } catch(error){
+        console.log(error);
+    }   
 }
 
 function inputLocation(){
@@ -60,9 +69,8 @@ function filterForecast(data){
     }
 }
 
-function filterLocation(data){
+function autoLocation(data){
     const city = data.city;
-    console.log(city)
     getWeather(city);
     getForecast(city);
 }
